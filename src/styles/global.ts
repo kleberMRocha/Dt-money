@@ -8,8 +8,9 @@ export const CreateGlobalStyle = createGlobalStyle`
     --purble: #5429CC;
     --green: #33CC95;
     --red: #E52E4D;
-    --titl: #363F5F;
+    --title: #363F5F;
     --text: #969CB2;
+    --white: #FFFFFF;
 }
 
 *{
