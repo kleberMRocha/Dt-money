@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { Card } from '../components/Cards';
 import styled from 'styled-components';
 import { Table } from '../components/Table';
+import {ModalTdMoney} from '../components/modal/index';
 
 const Contanainer = styled.main`
 display: flex;
@@ -32,9 +33,12 @@ height: 100%;
 
 
 export const Dashboard: React.FC = () => {
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <>
-      <Header />
+      <Header handleOpenModal={setOpenModal} />
+      <ModalTdMoney isOpen={openModal} handleOpenModal={setOpenModal} />
       <Contanainer>
         <Card type="income"/>
         <Card type="outcome"/>

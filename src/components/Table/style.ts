@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
 width: 97.5%;
 padding: 0 18%;
+height: 100%;
 margin-top: .5rem;
 .table-head{
     color: var(--text);
@@ -19,6 +20,7 @@ margin-top: .5rem;
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100%;
     background: #FFFFFF;
     border-radius: .3rem;
     padding: .4rem;
@@ -40,6 +42,14 @@ margin-top: .5rem;
 
     margin-top: .5rem;
 
+}
+
+@media(max-width:800px){
+    width: 100%;
+    padding:0 10%;
+    font-size: 10px;
+    justify-content: center;
+    
 }
  
 `;
