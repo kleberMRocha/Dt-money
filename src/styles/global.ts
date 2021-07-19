@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const CreateGlobalStyle = createGlobalStyle`
 
@@ -41,7 +42,18 @@ button{
     cursor: pointer;
 }
 
+@keyframes entrance {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .modalDT{
+animation: entrance .3s ease-in;
 position: fixed;
 width: 576px;
 height: 588px;
@@ -50,6 +62,17 @@ top: 16px;
 background: #F0F2F5;
 border-radius: 5px;
 padding: 48px
+}
+
+.ReactModal__Overlay{
+    background: #08082e8c !important;
+}
+
+.loadContainer{
+    margin: 8px 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 @media(max-width: 720px){

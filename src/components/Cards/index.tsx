@@ -6,20 +6,25 @@ import total from '../../assets/assets/total.svg';
 import { CardContainer } from './styles';
 
 const img = {
-    income,
-    outcome,
-    total
+  income,
+  outcome,
+  total,
+};
+
+interface CardProps {
+  type: 'total' | 'income' | 'outcome';
 }
 
-interface CardProps{
-    type: 'total' | 'income' | 'outcome'
-}
+export const Card: React.FC<CardProps> = ({ type }) => {
+  const getCardname = (type: 'total' | 'income' | 'outcome') => {
+    const titles = { total: 'Total', income: 'Entrada', outcome: 'Saída' };
+    return titles[type];
+  };
 
-export const Card: React.FC<CardProps> = ({type}) => {
   return (
     <CardContainer type={type}>
       <div>
-        <p>Entradas</p>
+        <p>{getCardname(type)}</p>
         <h3>R$ 17.400,00</h3>
       </div>
       <div>

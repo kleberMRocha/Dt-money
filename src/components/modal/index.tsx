@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import Modal from 'react-modal';
+import { Loader } from '../Loader/index';
 import { Form, BtnContainer, Header } from './style';
+import { Request, ITransactions } from '../../services/requests';
 import income from '../../assets/assets/income.svg';
 import outcome from '../../assets/assets/outcome.svg';
 interface IModal {
@@ -9,11 +12,13 @@ interface IModal {
 }
 
 export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
-  const [formData, setData] = useState({
+  const [isLoading, setLoading] = useState(false);
+  const [formData, setData] = useState<ITransactions>({
     nome: '',
     preco: '',
-    tipo: '',
+    tipo: 'income',
     categoria: '',
+    data: String(new Date()),
   });
 
   const handleUpdateDatas = (
@@ -21,14 +26,30 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
     field: 'nome' | 'preco' | 'tipo' | 'categoria'
   ) => {
     let stateClone = JSON.parse(JSON.stringify(formData));
-    stateClone[field] = value;
+    stateClone[field] = String(value);
 
     setData(stateClone);
+  };
+
+  const handleCreateTransaction = () => {
+    if (Object.values(formData).includes('')) {
+      toast.error('Há campos em branco!');
+      return;
+    }
+
+    setLoading(true);
+    Request.transactions_create(formData)
+      .then(() => {
+        toast.success('Transação cadastrada');
+      })
+      .catch(() => toast.error('Houve um erro'))
+      .finally(() => setLoading(false));
   };
 
   return (
     <Modal
       className="modalDT"
+      ariaHideApp={false}
       isOpen={isOpen}
       onRequestClose={() => handleOpenModal(false)}
       contentLabel="Example Modal"
@@ -50,6 +71,7 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
         />
         <input
           placeholder="Preço"
+          type="number"
           onChange={(e) => handleUpdateDatas(e.target.value, 'preco')}
         />
         <BtnContainer selectedBtn={formData.tipo}>
@@ -75,11 +97,12 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
           onChange={(e) => handleUpdateDatas(e.target.value, 'categoria')}
         />
         <button
+          disabled={isLoading}
           type="button"
           className="subimitModal"
-          onClick={() => console.log(formData)}
+          onClick={() => handleCreateTransaction()}
         >
-          Cadastrar
+          {isLoading ? <Loader /> : 'Cadastrar'}
         </button>
       </Form>
     </Modal>
