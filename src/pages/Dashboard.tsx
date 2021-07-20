@@ -39,13 +39,16 @@ const Contanainer = styled.main`
 
 export const Dashboard: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [isLoading, setIsloading] = useState(false);
   const [transaction, setTransaction] = useState<ITransactionsList[]>(
     [] as ITransactionsList[]
   );
-  console.log(transaction);
 
   useEffect(() => {
-    Request.transactions_index().then((res) => setTransaction(res.data));
+    setIsloading(true);
+    Request.transactions_index()
+      .then((res) => setTransaction(res.data))
+      .finally(() => setIsloading(false));
   }, []);
 
   return (
@@ -53,11 +56,11 @@ export const Dashboard: React.FC = () => {
       <Header handleOpenModal={setOpenModal} />
       <ModalTdMoney isOpen={openModal} handleOpenModal={setOpenModal} />
       <Contanainer>
-        <Card type="income" />
-        <Card type="outcome" />
-        <Card type="total" />
+        <Card type="income" transaction={transaction} />
+        <Card type="outcome" transaction={transaction} />
+        <Card type="total" transaction={transaction} />
       </Contanainer>
-      {transaction.length ? (
+      {!isLoading ? (
         <Table transaction={transaction} />
       ) : (
         <div className="loadContainer">

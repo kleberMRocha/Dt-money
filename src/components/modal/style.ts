@@ -63,7 +63,7 @@ export const Form = styled.form`
     border-radius: 5px;
     height: 64px;
     margin: 16px;
-    padding: 4p;
+    padding: 4px;
     &::placeholder {
       padding: 8px;
     }

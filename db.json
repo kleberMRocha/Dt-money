@@ -2,33 +2,53 @@
   "transactions": [
     {
       "transaction": {
-        "nome": "Roupas",
-        "preco": "100",
-        "tipo": "outcome",
-        "categoria": "Vestimenta ",
-        "data": "Sun Jul 18 2021 20:36:51 GMT-0300 (Brasilia Standard Time)"
+        "nome": "Salário",
+        "preco": "2000",
+        "tipo": "income",
+        "categoria": "Trabalho",
+        "data": "Mon Jul 19 2021 22:27:49 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 1
     },
     {
       "transaction": {
-        "nome": "Salário",
-        "preco": "2000",
-        "tipo": "income",
-        "categoria": "Salário",
-        "data": "Sun Jul 18 2021 20:51:54 GMT-0300 (Brasilia Standard Time)"
+        "nome": "Mercado",
+        "preco": "-500",
+        "tipo": "outcome",
+        "categoria": "Compras",
+        "data": "Mon Jul 19 2021 22:27:49 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 2
     },
     {
       "transaction": {
         "nome": "Mercado",
-        "preco": "500",
+        "preco": "-500",
         "tipo": "outcome",
         "categoria": "Compras",
-        "data": "Sun Jul 18 2021 21:25:25 GMT-0300 (Brasilia Standard Time)"
+        "data": "Mon Jul 19 2021 22:27:49 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 3
+    },
+    {
+      "transaction": {
+        "nome": "PC Gamer",
+        "preco": "-2000",
+        "tipo": "outcome",
+        "categoria": "Jogos",
+        "data": "Mon Jul 19 2021 22:39:56 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 4
+    },
+    {
+      "transaction": {
+        "nome": "Salario ",
+        "preco": "5000",
+        "tipo": "income",
+        "categoria": "Pagamentos",
+        "data": "Mon Jul 19 2021 22:58:21 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 5
     }
   ]
 }

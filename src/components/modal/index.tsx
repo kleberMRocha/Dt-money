@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 import { Loader } from '../Loader/index';
@@ -21,15 +21,15 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
     data: String(new Date()),
   });
 
-  const handleUpdateDatas = (
-    value: string,
-    field: 'nome' | 'preco' | 'tipo' | 'categoria'
-  ) => {
-    let stateClone = JSON.parse(JSON.stringify(formData));
-    stateClone[field] = String(value);
+  const handleUpdateDatas = useCallback(
+    (value: string, field: 'nome' | 'preco' | 'tipo' | 'categoria') => {
+      let stateClone = JSON.parse(JSON.stringify(formData));
+      stateClone[field] = String(value);
 
-    setData(stateClone);
-  };
+      setData(stateClone);
+    },
+    [formData]
+  );
 
   const handleCreateTransaction = () => {
     if (Object.values(formData).includes('')) {
@@ -37,8 +37,13 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
       return;
     }
 
+    let stateClone = JSON.parse(JSON.stringify(formData));
+    if (stateClone.tipo === 'outcome') {
+      stateClone.preco = String(stateClone.preco - 2 * stateClone.preco);
+    }
+    console.log(stateClone);
     setLoading(true);
-    Request.transactions_create(formData)
+    Request.transactions_create(stateClone)
       .then(() => {
         toast.success('Transação cadastrada');
       })

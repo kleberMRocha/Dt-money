@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface CardContainerProps {
   type: 'total' | 'income' | 'outcome';
+  isNagative: boolean;
 }
 
 export const CardContainer = styled.div<CardContainerProps>`
@@ -9,7 +10,12 @@ export const CardContainer = styled.div<CardContainerProps>`
   display: flex;
   width: 16rem;
   justify-content: space-between;
-  background: ${(props) => (props.type === 'total' ? '#33CC95' : '#ffffff')};
+  background: ${(props) => {
+    if (props.type === 'total' && props.isNagative) return 'tomato';
+    if (props.type === 'total' && !props.isNagative) return '#33CC95';
+    return '#ffffff';
+  }};
+
   border-radius: 5px;
   padding: 2rem 1.56em;
   margin-right: 2rem;
@@ -20,13 +26,12 @@ export const CardContainer = styled.div<CardContainerProps>`
   p {
     color: ${(props) => (props.type === 'total' ? '#ffffff' : 'var(--title)')};
   }
-  @media(max-width: 800px){
+  @media (max-width: 800px) {
     justify-content: center;
     align-items: center;
     text-align: center;
-    h3{
-        font-size: 1.2rem;
+    h3 {
+      font-size: 1.2rem;
     }
-
   }
 `;
