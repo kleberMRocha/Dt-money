@@ -2,7 +2,7 @@ export const format = {
   date: (value: string | number) => {
     const dataFormatada = new Date(value);
     const ano = dataFormatada.getFullYear();
-    const mes = dataFormatada.getMonth();
+    const mes = (dataFormatada.getMonth() + 1).toString().padStart(2, '0');
     const dia = dataFormatada.getDate();
 
     return `${dia}/${mes}/${ano}`;

@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import income from '../../assets/assets/income.svg';
 import outcome from '../../assets/assets/outcome.svg';
 import total from '../../assets/assets/total.svg';
 import { ITransactions } from '../../services/requests';
 import { getFomat } from '../../utils/getFormat';
-
+import eye from '../../assets/assets/eye.svg';
 import { CardContainer } from './styles';
 
 interface ITransactionsList {
@@ -24,6 +24,7 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ type, transaction }) => {
+  const [hidden, setHidden] = useState(false);
   const getCardname = (type: 'total' | 'income' | 'outcome') => {
     const titles = { total: 'Total', income: 'Entrada', outcome: 'Saída' };
     return titles[type];
@@ -60,6 +61,10 @@ export const Card: React.FC<CardProps> = ({ type, transaction }) => {
     return totalNumber;
   };
 
+  const getClasse = (value: boolean) => {
+    return value ? 'blurry' : '';
+  };
+
   const typeValueCards = useMemo(() => {
     return {
       total: getSum(totalValueArray),
@@ -69,10 +74,22 @@ export const Card: React.FC<CardProps> = ({ type, transaction }) => {
   }, [incomeValue, outcomeValue, totalValueArray]);
 
   return (
-    <CardContainer type={type} isNagative={typeValueCards[type] < 0}>
+    <CardContainer
+      hidden={hidden}
+      type={type}
+      isNagative={typeValueCards[type] < 0}
+    >
+      <button
+        type="button"
+        className="ocultar"
+        onClick={() => setHidden(!hidden)}
+      >
+        <img src={eye} alt="ocultar valores" />
+      </button>
+
       <div>
         <p>{getCardname(type)}</p>
-        <h3>
+        <h3 className={getClasse(hidden)}>
           {transaction.length ? getFomat('money', typeValueCards[type]) : '...'}
         </h3>
       </div>

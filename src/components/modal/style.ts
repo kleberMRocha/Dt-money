@@ -17,6 +17,15 @@ export const Header = styled.header`
 interface IBtnContainer {
   selectedBtn: string;
 }
+
+interface IError {
+  isErrored?: {
+    nome: boolean;
+    preco: boolean;
+    categoria: boolean;
+  };
+}
+
 export const BtnContainer = styled.div<IBtnContainer>`
   max-width: 480px;
   display: flex;
@@ -45,7 +54,7 @@ export const BtnContainer = styled.div<IBtnContainer>`
   }
 `;
 
-export const Form = styled.form`
+export const Form = styled.form<IError>`
   display: flex;
   flex-direction: column;
   .subimitModal {

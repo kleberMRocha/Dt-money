@@ -49,6 +49,16 @@
         "data": "Mon Jul 19 2021 22:58:21 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 5
+    },
+    {
+      "transaction": {
+        "nome": "Luz",
+        "preco": "-200",
+        "tipo": "outcome",
+        "categoria": "Contas a pagar ",
+        "data": "Tue Jul 20 2021 21:52:11 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 6
     }
   ]
 }

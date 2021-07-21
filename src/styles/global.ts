@@ -75,6 +75,10 @@ padding: 48px
     width: 100%;
 }
 
+#isErrored{
+    border: 2px solid tomato;
+}
+
 @media(max-width: 720px){
      .modalDT{
 width: 100%;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 import { Loader } from '../Loader/index';
@@ -11,6 +11,12 @@ interface IModal {
   handleOpenModal: (value: boolean) => void;
 }
 
+interface IError {
+  nome: boolean;
+  preco: boolean;
+  categoria: boolean;
+}
+
 export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
   const [isLoading, setLoading] = useState(false);
   const [formData, setData] = useState<ITransactions>({
@@ -19,6 +25,12 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
     tipo: 'income',
     categoria: '',
     data: String(new Date()),
+  });
+
+  const [isErrored, setIsErrored] = useState<IError>({
+    nome: false,
+    preco: false,
+    categoria: false,
   });
 
   const handleUpdateDatas = useCallback(
@@ -31,8 +43,25 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
     [formData]
   );
 
+  const setError = () => {
+    const clone = JSON.parse(JSON.stringify(isErrored as IError));
+    const fields: ('nome' | 'preco' | 'categoria')[] = [
+      'nome',
+      'preco',
+      'categoria',
+    ];
+
+    fields.forEach((field) => {
+      const isEmpity = formData[field] === '';
+      clone[field] = isEmpity;
+    });
+
+    setIsErrored(clone as IError);
+  };
+
   const handleCreateTransaction = () => {
     if (Object.values(formData).includes('')) {
+      setError();
       toast.error('Há campos em branco!');
       return;
     }
@@ -56,7 +85,17 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
       className="modalDT"
       ariaHideApp={false}
       isOpen={isOpen}
-      onRequestClose={() => handleOpenModal(false)}
+      onRequestClose={() => {
+        handleOpenModal(false);
+        setIsErrored({ nome: false, preco: false, categoria: false });
+        setData({
+          nome: '',
+          preco: '',
+          tipo: 'income',
+          categoria: '',
+          data: String(new Date()),
+        });
+      }}
       contentLabel="Example Modal"
     >
       <Header>
@@ -69,12 +108,14 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
         </button>
       </Header>
       <h2>Cadastrar transação</h2>
-      <Form className="formModal">
+      <Form className="formModal" isErrored={isErrored}>
         <input
+          id={isErrored.nome ? 'isErrored' : '1'}
           placeholder="Nome"
           onChange={(e) => handleUpdateDatas(e.target.value, 'nome')}
         />
         <input
+          id={isErrored.preco ? 'isErrored' : '2'}
           placeholder="Preço"
           type="number"
           onChange={(e) => handleUpdateDatas(e.target.value, 'preco')}
@@ -98,6 +139,7 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
         </BtnContainer>
 
         <input
+          id={isErrored.categoria ? 'isErrored' : '3'}
           placeholder="Categoria"
           onChange={(e) => handleUpdateDatas(e.target.value, 'categoria')}
         />
