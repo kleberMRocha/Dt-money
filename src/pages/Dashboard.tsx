@@ -47,14 +47,18 @@ export const Dashboard: React.FC = () => {
   useEffect(() => {
     setIsloading(true);
     Request.transactions_index()
-      .then((res) => setTransaction(res.data))
+      .then((res) => setTransaction(res.data.reverse()))
       .finally(() => setIsloading(false));
   }, []);
 
   return (
     <>
       <Header handleOpenModal={setOpenModal} />
-      <ModalTdMoney isOpen={openModal} handleOpenModal={setOpenModal} />
+      <ModalTdMoney
+        isOpen={openModal}
+        handleOpenModal={setOpenModal}
+        handleUpdateDash={setTransaction}
+      />
       <Contanainer>
         <Card type="income" transaction={transaction} />
         <Card type="outcome" transaction={transaction} />

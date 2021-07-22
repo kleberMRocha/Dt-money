@@ -9,6 +9,7 @@ import outcome from '../../assets/assets/outcome.svg';
 interface IModal {
   isOpen: boolean;
   handleOpenModal: (value: boolean) => void;
+  handleUpdateDash: (value: []) => void;
 }
 
 interface IError {
@@ -17,7 +18,11 @@ interface IError {
   categoria: boolean;
 }
 
-export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
+export const ModalTdMoney: React.FC<IModal> = ({
+  isOpen,
+  handleOpenModal,
+  handleUpdateDash,
+}) => {
   const [isLoading, setLoading] = useState(false);
   const [formData, setData] = useState<ITransactions>({
     nome: '',
@@ -80,29 +85,34 @@ export const ModalTdMoney: React.FC<IModal> = ({ isOpen, handleOpenModal }) => {
       .finally(() => setLoading(false));
   };
 
+  const handleClose = async () => {
+    handleOpenModal(false);
+    setIsErrored({ nome: false, preco: false, categoria: false });
+    setData({
+      nome: '',
+      preco: '',
+      tipo: 'income',
+      categoria: '',
+      data: String(new Date()),
+    });
+    const newTransactions = await Request.transactions_index();
+    console.log(newTransactions);
+    handleUpdateDash(newTransactions.data.reverse());
+  };
+
   return (
     <Modal
       className="modalDT"
       ariaHideApp={false}
       isOpen={isOpen}
-      onRequestClose={() => {
-        handleOpenModal(false);
-        setIsErrored({ nome: false, preco: false, categoria: false });
-        setData({
-          nome: '',
-          preco: '',
-          tipo: 'income',
-          categoria: '',
-          data: String(new Date()),
-        });
-      }}
+      onRequestClose={() => handleClose()}
       contentLabel="Example Modal"
     >
       <Header>
         <button
           type="button"
           className="closeBTn"
-          onClick={() => handleOpenModal(false)}
+          onClick={() => handleClose()}
         >
           X
         </button>

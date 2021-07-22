@@ -3,16 +3,41 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const CreateGlobalStyle = createGlobalStyle`
 
+
+.react-datepicker__input-container{
+    height: 48px;
+    input{
+        height: 100%;
+        border-radius: 4px;
+        padding: 0 5px;
+    }
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+}
+::-webkit-scrollbar {
+    width: 16px;
+    background: #F4F4F4;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--purple);
+    border-radius: 50px;
+}
+
+
 :root{
     --background: #E5E5E5;
     --purple-ligth: #6933FF;
-    --purble: #5429CC;
+    --purple: linear-gradient(316deg, #4062bb 0%, #5200ae 74%);
     --green: #33CC95;
     --red: #E52E4D;
     --title: #363F5F;
     --text: #969CB2;
     --white: #FFFFFF;
 }
+
 
 *{
     margin:0;

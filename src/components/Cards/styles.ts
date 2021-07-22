@@ -46,7 +46,7 @@ export const CardContainer = styled.div<CardContainerProps>`
 
     img {
       ${(props) =>
-        props.hidden ? 'filter: opacity(.4);' : 'filter: opacity(1);'}
+        props.hidden ? 'filter: opacity(.4);' : 'filter: opacity(.7);'}
     }
   }
   @media (max-width: 800px) {

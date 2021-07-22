@@ -1,6 +1,6 @@
 import React from 'react';
 import { ITransactions } from '../../services/requests';
-import { Container } from './style';
+import { Container, Main } from './style';
 import { getFomat } from '../../utils/getFormat';
 
 interface ITransactionsList {
@@ -22,18 +22,20 @@ export const Table: React.FC<ITable> = ({ transaction }) => {
           <div>Data</div>
         </div>
       </Container>
-      {transaction.map((tableIten) => {
-        return (
-          <Container type={tableIten.transaction.tipo} key={tableIten.id}>
-            <div className="table-item">
-              <div>{tableIten.transaction.nome}</div>
-              <div>{getFomat('money', tableIten.transaction.preco)}</div>
-              <div>{tableIten.transaction.categoria}</div>
-              <div>{getFomat('date', tableIten.transaction.data)}</div>
-            </div>
-          </Container>
-        );
-      })}
+      <Main>
+        {transaction.map((tableIten) => {
+          return (
+            <Container type={tableIten.transaction.tipo} key={tableIten.id}>
+              <div className="table-item">
+                <div>{tableIten.transaction.nome}</div>
+                <div>{getFomat('money', tableIten.transaction.preco)}</div>
+                <div>{tableIten.transaction.categoria}</div>
+                <div>{getFomat('date', tableIten.transaction.data)}</div>
+              </div>
+            </Container>
+          );
+        })}
+      </Main>
     </>
   );
 };

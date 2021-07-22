@@ -1,8 +1,21 @@
 import styled from 'styled-components';
 
 export const HeaderDt = styled.header`
+  .buttonHeaderContainer {
+    max-width: 50%;
+    min-height: 48px;
+    box-sizing: border-box;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    button {
+      margin: 4px;
+    }
+  }
   header {
-    background: var(--purble);
+    background: var(--purple);
     padding: 5% 10%;
     display: flex;
     justify-content: space-between;
@@ -14,7 +27,8 @@ export const HeaderDt = styled.header`
     color: var(--white);
   }
 
-  button {
+  .buttonDashboard {
+    min-width: 80px;
     background: var(--purple-ligth);
     color: var(--white);
     font-weight: bold;
@@ -22,17 +36,30 @@ export const HeaderDt = styled.header`
     border-radius: 0.3rem;
     border: none;
     transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      max-width: 30%;
+      filter: invert(1);
+    }
     &:hover {
       filter: brightness(0.9);
     }
   }
 
   @media (max-width: 800px) {
-    button {
-      position: fixed;
-      bottom: 0;
-      width: 80%;
-      padding: 1rem;
+    .buttonDashboard {
+      :nth-child(1) {
+        margin: 0 8px;
+      }
+      :nth-child(2) {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 50px;
+      }
     }
     header {
       height: 8rem;

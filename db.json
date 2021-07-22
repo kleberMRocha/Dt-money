@@ -59,6 +59,76 @@
         "data": "Tue Jul 20 2021 21:52:11 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 6
+    },
+    {
+      "transaction": {
+        "nome": "Moveis",
+        "preco": "-500",
+        "tipo": "outcome",
+        "categoria": "Casa",
+        "data": "Wed Jul 21 2021 19:41:37 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 7
+    },
+    {
+      "transaction": {
+        "nome": "Mercado",
+        "preco": "-800",
+        "tipo": "outcome",
+        "categoria": "Compras",
+        "data": "Wed Jul 21 2021 19:42:25 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 8
+    },
+    {
+      "transaction": {
+        "nome": "Luz",
+        "preco": "-300",
+        "tipo": "outcome",
+        "categoria": "Contas",
+        "data": "Wed Jul 21 2021 20:32:03 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 9
+    },
+    {
+      "transaction": {
+        "nome": "Freelancer",
+        "preco": "500",
+        "tipo": "income",
+        "categoria": "salario",
+        "data": "Wed Jul 21 2021 20:35:15 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 10
+    },
+    {
+      "transaction": {
+        "nome": "Água",
+        "preco": "-80",
+        "tipo": "outcome",
+        "categoria": "Contas ",
+        "data": "Wed Jul 21 2021 21:27:02 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 11
+    },
+    {
+      "transaction": {
+        "nome": "Mercado",
+        "preco": "-20",
+        "tipo": "outcome",
+        "categoria": "compras",
+        "data": "Wed Jul 21 2021 21:27:59 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 12
+    },
+    {
+      "transaction": {
+        "nome": "Médico",
+        "preco": "-500",
+        "tipo": "outcome",
+        "categoria": "Saúde",
+        "data": "Wed Jul 21 2021 21:53:26 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 13
     }
   ]
 }
