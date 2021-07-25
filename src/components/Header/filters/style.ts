@@ -1,24 +1,41 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { fadeInRight } from 'react-animations';
+
+const bounceAnimation = keyframes`${fadeInRight}`;
 
 export const ContainerFiltros = styled.aside`
-  @keyframes entrance {
-    0% {
-      margin-left: -800px;
-    }
-    100% {
-      margin-left: 0;
-    }
-  }
   position: absolute;
+  animation: 0.5s ${bounceAnimation};
   display: flex;
+  right: 0;
   flex-direction: column;
   height: 100%;
-  animation: 'entrance';
-  animation-duration: 0.5s;
   padding: 8px;
   z-index: 9999;
   background-color: #310e68;
   opacity: 0.95;
+  input {
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 0 5px;
+    height: 48px;
+  }
+  .checkbxContainer {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 8px;
+    input {
+      filter: hue-rotate(240deg);
+      transform: scale(1.6);
+      cursor: pointer;
+      margin: 0 10px;
+    }
+  }
   h1 {
     color: white;
   }
@@ -37,5 +54,11 @@ export const ContainerFiltros = styled.aside`
   .fechar {
     color: tomato;
     border: 1px tomato solid;
+  }
+  .limpar {
+    color: tomato;
+    border: 1px darkturquoise solid;
+    background: gainsboro;
+    color: gray;
   }
 `;

@@ -36,6 +36,11 @@ export const Table: React.FC<ITable> = ({ transaction }) => {
           );
         })}
       </Main>
+      <span className="transactionCount">
+        {transaction.length !== 0
+          ? `Total de ${transaction.length} transações `
+          : 'Nada encontrado tente limpar os iltros e tente novamente'}
+      </span>
     </>
   );
 };

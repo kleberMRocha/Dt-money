@@ -55,6 +55,7 @@ body, button, input, textarea{
 }
 
 html{
+    overflow-x: hidden;
     @media(max-width:1080px){
         font-size: 93.73%;
     }
@@ -65,6 +66,7 @@ html{
 
 button{
     cursor: pointer;
+    pointer-events: auto;
 }
 
 @keyframes entrance {
@@ -104,6 +106,15 @@ padding: 48px
     border: 2px solid tomato;
 }
 
+.transactionCount{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: var(--purple-ligth);
+    margin: 8px;
+}
+
 @media(max-width: 720px){
      .modalDT{
 width: 100%;
@@ -119,5 +130,6 @@ top: 0;
     opacity: inherit.8;
     cursor: not-allowed;
 }
+
 
 `;

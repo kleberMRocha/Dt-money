@@ -6,10 +6,12 @@ import { Form, BtnContainer, Header } from './style';
 import { Request, ITransactions } from '../../services/requests';
 import income from '../../assets/assets/income.svg';
 import outcome from '../../assets/assets/outcome.svg';
+import { ITransactionsList } from '../../pages/Dashboard';
 interface IModal {
   isOpen: boolean;
   handleOpenModal: (value: boolean) => void;
-  handleUpdateDash: (value: []) => void;
+  handleUpdateDash: (value: any) => void;
+  transactions: ITransactionsList[];
 }
 
 interface IError {
@@ -22,6 +24,7 @@ export const ModalTdMoney: React.FC<IModal> = ({
   isOpen,
   handleOpenModal,
   handleUpdateDash,
+  transactions,
 }) => {
   const [isLoading, setLoading] = useState(false);
   const [formData, setData] = useState<ITransactions>({
@@ -75,11 +78,16 @@ export const ModalTdMoney: React.FC<IModal> = ({
     if (stateClone.tipo === 'outcome') {
       stateClone.preco = String(stateClone.preco - 2 * stateClone.preco);
     }
-    console.log(stateClone);
     setLoading(true);
     Request.transactions_create(stateClone)
       .then(() => {
         toast.success('Transação cadastrada');
+        const newTransactions = [
+          ...transactions,
+          { id: transactions.length + 1, transaction: stateClone },
+        ].reverse();
+
+        handleUpdateDash(newTransactions);
       })
       .catch(() => toast.error('Houve um erro'))
       .finally(() => setLoading(false));
@@ -95,9 +103,6 @@ export const ModalTdMoney: React.FC<IModal> = ({
       categoria: '',
       data: String(new Date()),
     });
-    const newTransactions = await Request.transactions_index();
-    console.log(newTransactions);
-    handleUpdateDash(newTransactions.data.reverse());
   };
 
   return (

@@ -10,6 +10,7 @@ export const HeaderDt = styled.header`
     justify-content: center;
     align-items: stretch;
     flex-wrap: wrap;
+
     button {
       margin: 4px;
     }
@@ -34,26 +35,27 @@ export const HeaderDt = styled.header`
     font-weight: bold;
     padding: 0 1rem;
     border-radius: 0.3rem;
-    border: none;
     transition: 0.3s;
     display: flex;
+    border: none;
     justify-content: center;
     align-items: center;
+
     img {
       max-width: 30%;
       filter: invert(1);
     }
     &:hover {
-      filter: brightness(0.9);
+      filter: brightness(1.1);
     }
   }
 
   @media (max-width: 800px) {
     .buttonDashboard {
-      :nth-child(1) {
+      :nth-child(2) {
         margin: 0 8px;
       }
-      :nth-child(2) {
+      :nth-child(1) {
         position: fixed;
         bottom: 0;
         right: 0;

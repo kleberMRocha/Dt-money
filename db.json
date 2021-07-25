@@ -129,6 +129,96 @@
         "data": "Wed Jul 21 2021 21:53:26 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 13
+    },
+    {
+      "transaction": {
+        "nome": "Premio",
+        "preco": "200",
+        "tipo": "income",
+        "categoria": "Premiação",
+        "data": "Sat Jul 24 2021 19:29:39 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 14
+    },
+    {
+      "transaction": {
+        "nome": " Uber",
+        "preco": "-25",
+        "tipo": "outcome",
+        "categoria": "Transporte",
+        "data": "Sat Jul 24 2021 20:47:08 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 15
+    },
+    {
+      "transaction": {
+        "nome": "Uber",
+        "preco": "-15",
+        "tipo": "outcome",
+        "categoria": "transporte",
+        "data": "Sat Jul 24 2021 21:18:15 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 16
+    },
+    {
+      "transaction": {
+        "nome": "uber",
+        "preco": "-15",
+        "tipo": "outcome",
+        "categoria": "tranporte",
+        "data": "Sat Jul 24 2021 21:27:42 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 17
+    },
+    {
+      "transaction": {
+        "nome": "Farmácia",
+        "preco": "-50",
+        "tipo": "outcome",
+        "categoria": "Saúde ",
+        "data": "Sat Jul 24 2021 21:28:55 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 18
+    },
+    {
+      "transaction": {
+        "nome": "Uber",
+        "preco": "-12",
+        "tipo": "outcome",
+        "categoria": "Transporte",
+        "data": "Sat Jul 24 2021 21:30:34 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 19
+    },
+    {
+      "transaction": {
+        "nome": "Frelancer",
+        "preco": "80",
+        "tipo": "income",
+        "categoria": "Salário",
+        "data": "Sat Jul 24 2021 21:32:21 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 20
+    },
+    {
+      "transaction": {
+        "nome": "freelaner",
+        "preco": "50",
+        "tipo": "income",
+        "categoria": "Salário",
+        "data": "Sat Jul 24 2021 21:34:36 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 21
+    },
+    {
+      "transaction": {
+        "nome": "Uber",
+        "preco": "-20",
+        "tipo": "outcome",
+        "categoria": "tranporte",
+        "data": "Sat Jul 24 2021 21:35:09 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 22
     }
   ]
 }
