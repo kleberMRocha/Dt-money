@@ -1,15 +1,15 @@
 import styled, { keyframes } from 'styled-components';
 import { fadeInRight } from 'react-animations';
 
-const bounceAnimation = keyframes`${fadeInRight}`;
+const fadeInRightAnimation = keyframes`${fadeInRight}`;
 
 export const ContainerFiltros = styled.aside`
-  position: absolute;
-  animation: 0.5s ${bounceAnimation};
+  position: fixed;
+  animation: 0.5s ${fadeInRightAnimation};
   display: flex;
+  min-height: 100%;
   right: 0;
   flex-direction: column;
-  height: 100%;
   padding: 8px;
   z-index: 9999;
   background-color: #310e68;

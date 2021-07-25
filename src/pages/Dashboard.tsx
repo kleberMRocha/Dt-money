@@ -8,6 +8,8 @@ import { Request, ITransactions } from '../services/requests';
 import { Loader } from '../components/Loader';
 import { IUpadeDatas } from '../components/Header/filters/filters';
 import { getFomat } from '../utils/getFormat';
+import { PieChart, VerticalBarChart } from '../components/charts/index';
+import { ChartContainer } from './style';
 
 export interface ITransactionsList {
   id: number;
@@ -120,8 +122,27 @@ export const Dashboard: React.FC = () => {
         <Card type="outcome" transaction={transaction} />
         <Card type="total" transaction={transaction} />
       </Contanainer>
-      {!isLoading ? (
-        <Table transaction={transaction} />
+      {!isLoading && transaction.length ? (
+        <>
+          <Table transaction={transaction} />
+          <ChartContainer>
+            <PieChart
+              data={transaction}
+              title="Income Vs OutCome"
+              type="incomeVsOutcome"
+            />
+            <VerticalBarChart
+              data={transaction}
+              title="Income por categoria"
+              type="categoriasOutcome"
+            />
+            <VerticalBarChart
+              data={transaction}
+              title="OutCome por categoria"
+              type="categoriasIncome"
+            />
+          </ChartContainer>
+        </>
       ) : (
         <div className="loadContainer">
           <Loader />

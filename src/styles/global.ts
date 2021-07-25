@@ -18,7 +18,7 @@ export const CreateGlobalStyle = createGlobalStyle`
     background-color: #F4F4F4;
 }
 ::-webkit-scrollbar {
-    width: 16px;
+    width: 10px;
     background: #F4F4F4;
 }
 ::-webkit-scrollbar-thumb {
