@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React from 'react';
 import { Pie, Bar } from 'react-chartjs-2';
 import { ITransactionsList } from '../../pages/Dashboard';
@@ -9,17 +10,21 @@ interface IChart {
   type: 'incomeVsOutcome' | 'categoriasIncome' | 'categoriasOutcome';
 }
 
-const strategy = {
+const chartType = {
   incomeVsOutcome: (data: ITransactionsList[]) => {
     const array = data.map((t) => t.transaction.tipo.trim());
+    const values = data.map((v) => {
+      return { tipo: v.transaction.tipo, preco: v.transaction.preco };
+    });
+
     const count = { income: 0, outcome: 0 };
 
-    array.forEach((t) => {
-      if (t === 'outcome') {
-        count.outcome = count.outcome += 1;
+    values.forEach((t) => {
+      if (t.tipo === 'outcome') {
+        count.outcome = count.outcome += Number(t.preco);
         return;
       }
-      count.income = count.income += 1;
+      count.income = count.income += Number(t.preco);
     });
 
     const uniqueItems = array.filter(
@@ -27,15 +32,15 @@ const strategy = {
     );
 
     const chartInfos = {
-      labels: uniqueItems,
+      labels: uniqueItems.map((l) => `R$ ${l}`),
       datasets: [
         {
           data: [count.income, count.outcome],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
+            'rgba(84, 168, 133, 0.2)',
+            'rgba(187, 100, 119, 0.2)',
           ],
-          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+          borderColor: ['#5cc27e', '#b4415a'],
           borderWidth: 2,
         },
       ],
@@ -44,28 +49,59 @@ const strategy = {
     return chartInfos;
   },
   categoriasIncome: (data: ITransactionsList[]) => {
+    const incomes = data.map((t) => {
+      if (t.transaction.tipo === 'income') {
+        return {
+          categoria: t.transaction.categoria,
+          preco: t.transaction.preco,
+        };
+      }
+    });
+
+    const incomeInfos = incomes.filter((i) => i?.categoria);
+
+    const labels: (string | undefined)[] = incomes
+      .map((i) => i?.categoria.trim())
+      .filter(
+        (i, index, array) => i !== undefined && array.indexOf(i) === index
+      );
+
+    const getColor = (isBackground: boolean) => {
+      const colors = labels.map(() => {
+        const randon = Math.random() * (255 - 100) + 1;
+        const randonTwo = Math.random() * (30 - 1) + 1;
+
+        return `rgba(${5}, ${Number(randon.toFixed(0))}, ${Number(
+          randonTwo.toFixed(0)
+        )}, ${isBackground ? 0.5 : 1})`;
+      });
+
+      return colors;
+    };
+
+    const values = labels.map((v) => {
+      let filtredInfos = incomeInfos.filter((i) => {
+        return i?.categoria.trim() === v;
+      });
+
+      let sumValues: number = 0;
+      filtredInfos.forEach((value) => {
+        if (value?.preco) {
+          sumValues = Number(value?.preco) + sumValues;
+        }
+      });
+
+      return sumValues;
+    });
+
     const dataChart = {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: labels,
       datasets: [
         {
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
+          label: 'Entradas Valor em R$',
+          data: values,
+          backgroundColor: getColor(true),
+          borderColor: getColor(false),
           borderWidth: 1,
         },
       ],
@@ -74,28 +110,59 @@ const strategy = {
     return dataChart;
   },
   categoriasOutcome: (data: ITransactionsList[]) => {
+    const outcome = data.map((t) => {
+      if (t.transaction.tipo === 'outcome') {
+        return {
+          categoria: t.transaction.categoria,
+          preco: t.transaction.preco,
+        };
+      }
+    });
+
+    const incomeInfos = outcome.filter((i) => i?.categoria);
+
+    const labels: (string | undefined)[] = outcome
+      .map((i) => i?.categoria.trim())
+      .filter(
+        (i, index, array) => i !== undefined && array.indexOf(i) === index
+      );
+
+    const getColor = (isBackground: boolean) => {
+      const colors = labels.map(() => {
+        const randon = Math.random() * (255 - 1) + 1;
+        const randonTwo = Math.random() * (30 - 1) + 1;
+
+        return `rgba(${Number(randon.toFixed(0))}, ${6}, ${Number(
+          randonTwo.toFixed(0)
+        )}, ${isBackground ? 0.5 : 1})`;
+      });
+
+      return colors;
+    };
+
+    const values = labels.map((v) => {
+      let filtredInfos = incomeInfos.filter((i) => {
+        return i?.categoria.trim() === v;
+      });
+
+      let sumValues: number = 0;
+      filtredInfos.forEach((value) => {
+        if (value?.preco) {
+          sumValues = Number(value?.preco) + sumValues;
+        }
+      });
+
+      return Math.abs(sumValues);
+    });
+
     const dataChart = {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Oaa'],
+      labels: labels,
       datasets: [
         {
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
+          label: 'Entradas Valor em R$',
+          data: values,
+          backgroundColor: getColor(true),
+          borderColor: getColor(false),
           borderWidth: 1,
         },
       ],
@@ -103,15 +170,6 @@ const strategy = {
 
     return dataChart;
   },
-};
-
-export const PieChart: React.FC<IChart> = ({ title, data, type }) => {
-  return (
-    <ContainerPieChart>
-      <h2>{title}</h2>
-      <Pie data={strategy[type](data)} />
-    </ContainerPieChart>
-  );
 };
 
 const options = {
@@ -126,9 +184,18 @@ const options = {
   },
 };
 
+export const PieChart: React.FC<IChart> = ({ title, data, type }) => {
+  return (
+    <ContainerPieChart>
+      <h2>{title}</h2>
+      <Pie data={chartType[type](data)} />
+    </ContainerPieChart>
+  );
+};
+
 export const VerticalBarChart: React.FC<IChart> = ({ data, title, type }) => (
   <ContainerPieChart>
     <h2>{title}</h2>
-    <Bar data={strategy[type](data)} options={options} />
+    <Bar data={chartType[type](data)} options={options} />
   </ContainerPieChart>
 );

@@ -57,6 +57,7 @@ export const HeaderDt = styled.header`
       }
       :nth-child(1) {
         position: fixed;
+        z-index: 9999;
         bottom: 0;
         right: 0;
         width: 100%;

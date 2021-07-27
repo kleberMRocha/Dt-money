@@ -133,12 +133,12 @@ export const Dashboard: React.FC = () => {
             />
             <VerticalBarChart
               data={transaction}
-              title="Income por categoria"
+              title="Outcome por categoria"
               type="categoriasOutcome"
             />
             <VerticalBarChart
               data={transaction}
-              title="OutCome por categoria"
+              title="Income por categoria"
               type="categoriasIncome"
             />
           </ChartContainer>

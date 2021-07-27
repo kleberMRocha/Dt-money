@@ -42,7 +42,7 @@
     },
     {
       "transaction": {
-        "nome": "Salario ",
+        "nome": "Salário",
         "preco": "5000",
         "tipo": "income",
         "categoria": "Pagamentos",
@@ -95,7 +95,7 @@
         "nome": "Freelancer",
         "preco": "500",
         "tipo": "income",
-        "categoria": "salario",
+        "categoria": "Salário",
         "data": "Wed Jul 21 2021 20:35:15 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 10
@@ -155,7 +155,7 @@
         "nome": "Uber",
         "preco": "-15",
         "tipo": "outcome",
-        "categoria": "transporte",
+        "categoria": "Transporte",
         "data": "Sat Jul 24 2021 21:18:15 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 16
@@ -165,7 +165,7 @@
         "nome": "uber",
         "preco": "-15",
         "tipo": "outcome",
-        "categoria": "tranporte",
+        "categoria": "Transporte",
         "data": "Sat Jul 24 2021 21:27:42 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 17
@@ -215,10 +215,50 @@
         "nome": "Uber",
         "preco": "-20",
         "tipo": "outcome",
-        "categoria": "tranporte",
+        "categoria": "Transporte",
         "data": "Sat Jul 24 2021 21:35:09 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 22
+    },
+    {
+      "transaction": {
+        "nome": "Pagamentos",
+        "preco": "500",
+        "tipo": "income",
+        "categoria": "Pagamentos",
+        "data": "Mon Jul 26 2021 21:36:51 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 23
+    },
+    {
+      "transaction": {
+        "nome": "Luz",
+        "preco": "-150",
+        "tipo": "outcome",
+        "categoria": "Contas a pagar",
+        "data": "Mon Jul 26 2021 22:20:53 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 24
+    },
+    {
+      "transaction": {
+        "nome": "Freelancer",
+        "preco": "800",
+        "tipo": "income",
+        "categoria": "Salário",
+        "data": "Mon Jul 26 2021 22:29:41 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 25
+    },
+    {
+      "transaction": {
+        "nome": "Livros novos",
+        "preco": "-80",
+        "tipo": "outcome",
+        "categoria": "Livros",
+        "data": "Mon Jul 26 2021 22:37:34 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 26
     }
   ]
 }
