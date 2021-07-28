@@ -68,14 +68,21 @@ export const Dashboard: React.FC = () => {
     setIsloading(true);
     Request.transactions_index()
       .then((res) => {
-        debugger;
         const allTransactions: ITransactionsList[] = res.data;
 
         let filtredTransactions = allTransactions.filter((t) => {
           if (value.categoriaSelected === '' && !value.isFilterByData) return t;
 
           if (value.isFilterByData) {
-            console.log(value.categoriaSelected);
+            if (value.byMonth) {
+              return value.categoriaSelected !== ''
+                ? String(getFomat('date', t.transaction.data)).substring(3) ===
+                    value.startDate &&
+                    t.transaction.categoria === value.categoriaSelected
+                : String(getFomat('date', t.transaction.data)).substring(3) ===
+                    value.startDate;
+            }
+
             return value.categoriaSelected !== ''
               ? getFomat('date', t.transaction.data) === value.startDate &&
                   t.transaction.categoria === value.categoriaSelected
@@ -122,15 +129,10 @@ export const Dashboard: React.FC = () => {
         <Card type="outcome" transaction={transaction} />
         <Card type="total" transaction={transaction} />
       </Contanainer>
-      {!isLoading && transaction.length ? (
+      {!isLoading ? (
         <>
           <Table transaction={transaction} />
           <ChartContainer>
-            <PieChart
-              data={transaction}
-              title="Income Vs OutCome"
-              type="incomeVsOutcome"
-            />
             <VerticalBarChart
               data={transaction}
               title="Outcome por categoria"
@@ -140,6 +142,18 @@ export const Dashboard: React.FC = () => {
               data={transaction}
               title="Income por categoria"
               type="categoriasIncome"
+            />
+          </ChartContainer>
+          <ChartContainer>
+            <PieChart
+              data={transaction}
+              title="Income Vs OutCome"
+              type="incomeVsOutcome"
+            />
+            <PieChart
+              data={transaction}
+              title="Pizza Por Categoria"
+              type="byCategory"
             />
           </ChartContainer>
         </>

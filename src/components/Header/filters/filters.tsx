@@ -22,6 +22,7 @@ export interface IUpadeDatas {
   isFilterByData: boolean;
   startDate: string;
   reset?: boolean;
+  byMonth: boolean;
 }
 
 interface ITransaaction {
@@ -48,17 +49,35 @@ export const Filters: React.FC<IFilter> = ({
 
   const [categorias, setCategorias] = useState([] as string[]);
   const [categoriaSelected, setCategory] = useState('');
+  const [byMonth, setByMonth] = useState(false);
 
   const [transactionType, setTransaciontype] = useState({
     entrada: true,
     saida: true,
   });
 
+  useEffect(() => {
+    const dataFormatCheck = startDate.split('/');
+    if (dataFormatCheck.length !== 3) {
+      let oldformat = getFomat('date', String(new Date()));
+      setStartDate(String(oldformat));
+      return;
+    }
+
+    if (byMonth) {
+      const dateByMM = startDate.split('/');
+      const newDateByM = `${dateByMM[1]}/${dateByMM[2]}`;
+      setStartDate(newDateByM);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [byMonth]);
+
   const handleResetFilter = () => {
     setTransaciontype({
       entrada: true,
       saida: true,
     });
+    setByMonth(false);
     setCategory('');
     setStartDate(getFomat('date', String(new Date())) as string);
 
@@ -68,7 +87,18 @@ export const Filters: React.FC<IFilter> = ({
       isFilterByData,
       startDate,
       transactionType,
+      byMonth,
     });
+  };
+
+  const handleSetDate = (date: Date | [Date, Date] | null) => {
+    const newDate = byMonth
+      ? String(getFomat('date', String(date))).length === 9
+        ? String(getFomat('date', String(date))).substring(2)
+        : String(getFomat('date', String(date))).substring(3)
+      : String(getFomat('date', String(date)));
+
+    setStartDate(newDate);
   };
 
   const [isFilterByData, setfilterDate] = useState(false);
@@ -79,6 +109,7 @@ export const Filters: React.FC<IFilter> = ({
       transactionType,
       isFilterByData,
       startDate,
+      byMonth,
     });
   };
 
@@ -111,13 +142,24 @@ export const Filters: React.FC<IFilter> = ({
             <label htmlFor="isData">Filtrar por data</label>
           </div>
           {isFilterByData && (
-            <Datepicker
-              locale="ptBR"
-              value={startDate}
-              onChange={(e) =>
-                setStartDate(getFomat('date', String(e)) as string)
-              }
-            />
+            <>
+              <Datepicker
+                locale="ptBR"
+                value={startDate}
+                onChange={(e) => handleSetDate(e)}
+              />
+
+              <div className="checkbxContainer">
+                <input
+                  type="checkbox"
+                  id="mes"
+                  checked={byMonth}
+                  name="mes"
+                  onChange={() => setByMonth(!byMonth)}
+                />
+                <label htmlFor="mes">Por Mês</label>
+              </div>
+            </>
           )}
 
           <div className="checkbxContainer">

@@ -9,7 +9,7 @@ export const ContainerPieChart = styled.div<ITypeChart>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   background-color: #ffffff;
   border: 2px #ffffff solid;
   padding: 8px;
@@ -21,19 +21,26 @@ export const ContainerPieChart = styled.div<ITypeChart>`
     filter: drop-shadow(0 0 0.2rem #6933ff);
   }
 
-  max-width: 320px;
-  max-height: 350px;
-
-  min-width: 320px;
+  min-width: 40%;
   min-height: 350px;
+
+  canvas {
+    max-width: 300px;
+    align-self: center;
+  }
 
   border-radius: 8px;
   h2 {
-    position: absolute;
-    top: 0;
+    margin-bottom: auto;
     font-size: 16px;
     text-align: center;
     color: #5200ae;
     margin: 4px 0;
+  }
+
+  @media (max-width: 800px) {
+    min-width: 100%;
+    min-height: 350px;
+    justify-content: center;
   }
 `;

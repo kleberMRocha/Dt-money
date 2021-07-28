@@ -14,7 +14,7 @@ export const Main = styled.main`
 `;
 
 export const Container = styled.div<IItem>`
-  width: 97.5%;
+  width: 95.5%;
   padding: 0 18%;
   height: 100%;
   margin-top: 0.5rem;

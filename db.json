@@ -259,6 +259,16 @@
         "data": "Mon Jul 26 2021 22:37:34 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 26
+    },
+    {
+      "transaction": {
+        "nome": "Uber",
+        "preco": "-18",
+        "tipo": "outcome",
+        "categoria": "Transporte",
+        "data": "Tue Jul 27 2021 22:06:22 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 27
     }
   ]
 }

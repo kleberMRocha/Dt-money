@@ -60,6 +60,7 @@ export const HeaderDt = styled.header`
         z-index: 9999;
         bottom: 0;
         right: 0;
+        margin: 0;
         width: 100%;
         height: 50px;
       }
