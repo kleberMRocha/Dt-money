@@ -8,11 +8,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 interface IHeader {
   handleOpenModal: (value: boolean) => void;
   handleUpadeDatas: (value: IUpadeDatas) => void;
+  handleOpenModalEdit: (value: boolean) => void;
 }
 
 export const Header: React.FC<IHeader> = ({
   handleOpenModal,
   handleUpadeDatas,
+  handleOpenModalEdit,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,6 +29,12 @@ export const Header: React.FC<IHeader> = ({
         <header>
           <img src={dtlogo} alt="Logo DTmoney" />
           <div className="buttonHeaderContainer">
+            <button
+              className="buttonDashboard"
+              onClick={() => handleOpenModalEdit(true)}
+            >
+              <span>Gerenciar Transações</span>
+            </button>
             <button
               className="buttonDashboard"
               onClick={() => handleOpenModal(true)}

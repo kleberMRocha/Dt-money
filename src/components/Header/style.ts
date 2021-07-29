@@ -52,10 +52,22 @@ export const HeaderDt = styled.header`
 
   @media (max-width: 800px) {
     .buttonDashboard {
-      :nth-child(2) {
-        margin: 0 8px;
-      }
       :nth-child(1) {
+        margin: 4px;
+        margin-left: 8px;
+        padding: 2px;
+        width: 100%;
+      }
+      :nth-child(3) {
+        margin: 4px;
+        padding: 2px;
+        margin-left: 8px;
+        width: 100%;
+        img {
+          width: 20px;
+        }
+      }
+      :nth-child(2) {
         position: fixed;
         z-index: 9999;
         bottom: 0;

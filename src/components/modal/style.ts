@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface IBtnContainer {
+  selectedBtn: string;
+}
+
 export const Header = styled.header`
   display: flex;
   position: absolute;
@@ -13,10 +17,6 @@ export const Header = styled.header`
     border: none;
   }
 `;
-
-interface IBtnContainer {
-  selectedBtn: string;
-}
 
 interface IError {
   isErrored?: {
@@ -81,6 +81,23 @@ export const Form = styled.form<IError>`
     :hover {
       transition: 0.5s;
       filter: contrast(120%);
+    }
+  }
+`;
+
+export const TableContainer = styled.div`
+  main {
+    min-height: 400px;
+  }
+  [type='outcome'],
+  [type='income'] {
+    .table-item {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      div {
+        text-align: center;
+      }
     }
   }
 `;

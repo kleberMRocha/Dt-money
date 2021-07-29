@@ -3,7 +3,7 @@ import { Header } from '../components/Header';
 import { Card } from '../components/Cards';
 import styled from 'styled-components';
 import { Table } from '../components/Table';
-import { ModalTdMoney } from '../components/modal/index';
+import { ModalTdMoney, ModalTdMoneyEditar } from '../components/modal/index';
 import { Request, ITransactions } from '../services/requests';
 import { Loader } from '../components/Loader';
 import { IUpadeDatas } from '../components/Header/filters/filters';
@@ -43,6 +43,7 @@ const Contanainer = styled.main`
 
 export const Dashboard: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [openModalEdit, setOpenModalEdit] = useState(false);
   const [isLoading, setIsloading] = useState(false);
 
   const [transaction, setTransaction] = useState<ITransactionsList[]>(
@@ -115,12 +116,19 @@ export const Dashboard: React.FC = () => {
   return (
     <>
       <Header
+        handleOpenModalEdit={setOpenModalEdit}
         handleUpadeDatas={handleUpdateDashboardDatas}
         handleOpenModal={setOpenModal}
       />
       <ModalTdMoney
         isOpen={openModal}
         handleOpenModal={setOpenModal}
+        handleUpdateDash={setTransaction}
+        transactions={transaction}
+      />
+      <ModalTdMoneyEditar
+        isOpen={openModalEdit}
+        handleOpenModal={setOpenModalEdit}
         handleUpdateDash={setTransaction}
         transactions={transaction}
       />

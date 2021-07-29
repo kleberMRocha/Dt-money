@@ -56,6 +56,7 @@ body, button, input, textarea{
 
 html{
     overflow-x: hidden;
+    scroll-behavior: smooth;
     @media(max-width:1080px){
         font-size: 93.73%;
     }

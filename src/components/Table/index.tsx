@@ -9,19 +9,23 @@ interface ITransactionsList {
 }
 interface ITable {
   transaction: ITransactionsList[];
+  hidenHeader?: boolean;
 }
 
-export const Table: React.FC<ITable> = ({ transaction }) => {
+export const Table: React.FC<ITable> = ({ transaction, hidenHeader }) => {
   return (
     <>
-      <Container>
-        <div className="table-head">
-          <div>Título</div>
-          <div>Preço</div>
-          <div>Categoria</div>
-          <div>Data</div>
-        </div>
-      </Container>
+      {!hidenHeader && (
+        <Container>
+          <div className="table-head">
+            <div>Título</div>
+            <div>Preço</div>
+            <div>Categoria</div>
+            <div>Data</div>
+          </div>
+        </Container>
+      )}
+
       <Main>
         {transaction.map((tableIten) => {
           return (
