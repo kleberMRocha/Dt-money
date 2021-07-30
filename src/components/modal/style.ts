@@ -87,8 +87,62 @@ export const Form = styled.form<IError>`
 
 export const TableContainer = styled.div`
   main {
-    min-height: 400px;
+    min-height: 240px;
   }
+  .formContainer {
+    position: relative;
+    width: 100%;
+    padding: 0 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    input,
+    select {
+      border-radius: 8px;
+      padding: 8px;
+      height: 32px;
+      border: 1px solid #6933ff;
+      margin: 4px;
+      &::placeholder {
+        padding: 8px;
+      }
+      width: 60%;
+    }
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      height: 50%;
+      width: 100%;
+      button {
+        width: 100%;
+        margin: 8px;
+        padding: 8px;
+        &:hover {
+          filter: brightness(0.9);
+        }
+        img {
+          max-width: 50px;
+          filter: invert(0.3);
+        }
+        :nth-child(1) {
+          border: none;
+          background-color: #eed202;
+        }
+        :nth-child(2) {
+          border: none;
+          background-color: tomato;
+        }
+        img {
+          width: 20px;
+        }
+      }
+    }
+  }
+
   [type='outcome'],
   [type='income'] {
     .table-item {
@@ -97,6 +151,22 @@ export const TableContainer = styled.div`
       cursor: pointer;
       div {
         text-align: center;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    .formContainer {
+      div {
+        bottom: -280px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+      input,
+      select {
+        width: 100%;
       }
     }
   }

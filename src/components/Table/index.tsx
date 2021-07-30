@@ -9,13 +9,18 @@ interface ITransactionsList {
 }
 interface ITable {
   transaction: ITransactionsList[];
-  hidenHeader?: boolean;
+  hiddenHeader?: boolean;
+  handleUpdateCurrent?: (transaction: ITransactions, id?: number) => void;
 }
 
-export const Table: React.FC<ITable> = ({ transaction, hidenHeader }) => {
+export const Table: React.FC<ITable> = ({
+  transaction,
+  hiddenHeader,
+  handleUpdateCurrent,
+}) => {
   return (
     <>
-      {!hidenHeader && (
+      {!hiddenHeader && (
         <Container>
           <div className="table-head">
             <div>Título</div>
@@ -29,13 +34,31 @@ export const Table: React.FC<ITable> = ({ transaction, hidenHeader }) => {
       <Main>
         {transaction.map((tableIten) => {
           return (
-            <Container type={tableIten.transaction.tipo} key={tableIten.id}>
-              <div className="table-item">
-                <div>{tableIten.transaction.nome}</div>
-                <div>{getFomat('money', tableIten.transaction.preco)}</div>
-                <div>{tableIten.transaction.categoria}</div>
-                <div>{getFomat('date', tableIten.transaction.data)}</div>
-              </div>
+            <Container
+              onClick={() =>
+                handleUpdateCurrent &&
+                handleUpdateCurrent(tableIten.transaction, tableIten.id)
+              }
+              type={tableIten.transaction.tipo}
+              key={tableIten.id}
+            >
+              {hiddenHeader ? (
+                <button>
+                  <div className="table-item">
+                    <div>{tableIten.transaction.nome}</div>
+                    <div>{getFomat('money', tableIten.transaction.preco)}</div>
+                    <div>{tableIten.transaction.categoria}</div>
+                    <div>{getFomat('date', tableIten.transaction.data)}</div>
+                  </div>
+                </button>
+              ) : (
+                <div className="table-item">
+                  <div>{tableIten.transaction.nome}</div>
+                  <div>{getFomat('money', tableIten.transaction.preco)}</div>
+                  <div>{tableIten.transaction.categoria}</div>
+                  <div>{getFomat('date', tableIten.transaction.data)}</div>
+                </div>
+              )}
             </Container>
           );
         })}

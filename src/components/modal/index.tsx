@@ -6,6 +6,8 @@ import { Form, BtnContainer, Header, TableContainer } from './style';
 import { Request, ITransactions } from '../../services/requests';
 import income from '../../assets/assets/income.svg';
 import outcome from '../../assets/assets/outcome.svg';
+import excluir from '../../assets/assets/trash-solid.svg';
+import editar from '../../assets/assets/edit-regular.svg';
 import { ITransactionsList } from '../../pages/Dashboard';
 import { Table } from '../../components/Table';
 interface IModal {
@@ -193,6 +195,31 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
     categoria: false,
   });
 
+  const [currentTransactionSelected, setCurrent] = useState<ITransactions>({
+    nome: '',
+    preco: '',
+    tipo: 'income',
+    categoria: '',
+    data: String(new Date()),
+  });
+  const [currentId, setCurrentId] = useState<null | number>(null);
+
+  const handleUpdateCurrent = (transaction: ITransactions, id?: number) => {
+    setCurrentId(id as number | null);
+    const clone = JSON.parse(JSON.stringify(transaction));
+    setCurrent(clone);
+  };
+
+  const handleUpdateInputEdit = (
+    transaction: ITransactions,
+    field: string,
+    value: string
+  ) => {
+    const clone = JSON.parse(JSON.stringify(transaction));
+    clone[field] = value;
+    setCurrent(clone);
+  };
+
   const handleUpdateDatas = useCallback(
     (value: string, field: 'nome' | 'preco' | 'tipo' | 'categoria') => {
       let stateClone = JSON.parse(JSON.stringify(formData));
@@ -246,6 +273,13 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
   };
 
   const handleClose = async () => {
+    setCurrent({
+      nome: '',
+      preco: '',
+      tipo: 'income',
+      categoria: '',
+      data: String(new Date()),
+    });
     handleOpenModal(false);
     setIsErrored({ nome: false, preco: false, categoria: false });
     setData({
@@ -276,13 +310,69 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
       </Header>
       <h2> Gerenciar Transações </h2>
       <TableContainer>
-        <Table transaction={transactions} hidenHeader />
+        <Table
+          transaction={transactions}
+          handleUpdateCurrent={handleUpdateCurrent}
+          hiddenHeader
+        />
         <div className="formContainer">
-          <input type="text" placeholder="Nome" />
-          <input type="text" placeholder="Preço" />
-          <input type="text" placeholder="Categoria" />
-          <button>Editar</button>
-          <button>Excluir</button>
+          <input
+            type="text"
+            placeholder="Nome"
+            value={currentTransactionSelected.nome}
+            onChange={(e) => {
+              handleUpdateInputEdit(
+                currentTransactionSelected,
+                'nome',
+                e.target.value
+              );
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Preço"
+            value={currentTransactionSelected.preco}
+            onChange={(e) => {
+              handleUpdateInputEdit(
+                currentTransactionSelected,
+                'preco',
+                e.target.value
+              );
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Categoria"
+            value={currentTransactionSelected.categoria}
+            onChange={(e) => {
+              handleUpdateInputEdit(
+                currentTransactionSelected,
+                'categoria',
+                e.target.value
+              );
+            }}
+          />
+          <select
+            onChange={(e) => {
+              handleUpdateInputEdit(
+                currentTransactionSelected,
+                'tipo',
+                e.target.value
+              );
+            }}
+            value={currentTransactionSelected.tipo}
+          >
+            <option value={'outcome'}>outcome</option>
+            <option value={'income'}>income</option>
+          </select>
+          <div>
+            <button>
+              <img src={editar} alt="Editar" />
+            </button>
+            <button>
+              <img src={excluir} alt="excluir" />
+            </button>
+          </div>
         </div>
       </TableContainer>
     </Modal>

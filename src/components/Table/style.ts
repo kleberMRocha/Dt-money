@@ -18,6 +18,11 @@ export const Container = styled.div<IItem>`
   padding: 0 18%;
   height: 100%;
   margin-top: 0.5rem;
+  button {
+    width: 100%;
+    border: 1px solid var(--text);
+    border-radius: 5px;
+  }
   &:hover {
     filter: brightness(95%);
   }

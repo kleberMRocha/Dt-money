@@ -122,7 +122,7 @@ export const Filters: React.FC<IFilter> = ({
         (item: string, index: number) => categorias.indexOf(item) === index
       );
 
-      setCategorias(uniqueArray);
+      setCategorias(uniqueArray.sort());
     });
   }, []);
 

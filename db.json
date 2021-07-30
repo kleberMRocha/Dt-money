@@ -269,6 +269,26 @@
         "data": "Tue Jul 27 2021 22:06:22 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 27
+    },
+    {
+      "transaction": {
+        "nome": "ifood",
+        "preco": "-80",
+        "tipo": "outcome",
+        "categoria": "Alimentação",
+        "data": "Thu Jul 29 2021 21:03:33 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 28
+    },
+    {
+      "transaction": {
+        "nome": "ifood",
+        "preco": "-50",
+        "tipo": "outcome",
+        "categoria": "Alimentação",
+        "data": "Thu Jul 29 2021 21:03:33 GMT-0300 (Brasilia Standard Time)"
+      },
+      "id": 29
     }
   ]
 }
