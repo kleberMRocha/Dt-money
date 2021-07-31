@@ -52,16 +52,6 @@
     },
     {
       "transaction": {
-        "nome": "Luz",
-        "preco": "-200",
-        "tipo": "outcome",
-        "categoria": "Contas a pagar ",
-        "data": "Tue Jul 20 2021 21:52:11 GMT-0300 (Brasilia Standard Time)"
-      },
-      "id": 6
-    },
-    {
-      "transaction": {
         "nome": "Moveis",
         "preco": "-500",
         "tipo": "outcome",
@@ -239,16 +229,6 @@
         "data": "Mon Jul 26 2021 22:20:53 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 24
-    },
-    {
-      "transaction": {
-        "nome": "Freelancer",
-        "preco": "800",
-        "tipo": "income",
-        "categoria": "Salário",
-        "data": "Mon Jul 26 2021 22:29:41 GMT-0300 (Brasilia Standard Time)"
-      },
-      "id": 25
     },
     {
       "transaction": {
