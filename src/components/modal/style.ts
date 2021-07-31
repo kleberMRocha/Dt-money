@@ -89,6 +89,7 @@ export const TableContainer = styled.div`
   main {
     min-height: 240px;
   }
+
   .formContainer {
     position: relative;
     width: 100%;
@@ -105,10 +106,11 @@ export const TableContainer = styled.div`
       height: 32px;
       border: 1px solid #6933ff;
       margin: 4px;
+      background: #ffffff;
       &::placeholder {
         padding: 8px;
       }
-      width: 60%;
+      width: 100%;
     }
     div {
       display: flex;
@@ -151,6 +153,34 @@ export const TableContainer = styled.div`
       cursor: pointer;
       div {
         text-align: center;
+      }
+    }
+  }
+
+  .deletingConfirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    p {
+      color: tomato;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    span {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      button {
+        :nth-child(1) {
+          background: tomato;
+          color: white;
+        }
+        :nth-child(2) {
+          background: gray;
+          color: white;
+        }
       }
     }
   }

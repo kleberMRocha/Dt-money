@@ -19,4 +19,13 @@ export const Request = {
   transactions_index: (): Promise<any> => {
     return api.get('/transactions');
   },
+  transactions_update: (value: {}, id: number): Promise<any> => {
+    return api.patch(`/transactions/${id}`, {
+      id,
+      transaction: value,
+    });
+  },
+  transactions_delete: (id: number): Promise<any> => {
+    return api.delete(`/transactions/${id}`);
+  },
 };

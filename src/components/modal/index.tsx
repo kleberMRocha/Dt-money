@@ -180,7 +180,9 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
   handleUpdateDash,
   transactions,
 }) => {
+  const [isADeletingFlow, setADeletingFlow] = useState(false);
   const [isLoading, setLoading] = useState(false);
+
   const [formData, setData] = useState<ITransactions>({
     nome: '',
     preco: '',
@@ -204,6 +206,41 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
   });
   const [currentId, setCurrentId] = useState<null | number>(null);
 
+  const handleUpdateATransaction = (data: ITransactions, id: number) => {
+    if (data.tipo === 'outcome' && Number(data.preco) > 0) {
+      data.preco = `-${data.preco}`;
+    }
+
+    if (data.tipo === 'income' && Number(data.preco) < 0) {
+      data.preco = data.preco.substr(1);
+    }
+
+    Request.transactions_update(data, id)
+      .then((res) => {
+        console.log(res);
+        if (res.statusText === 'OK') {
+          toast.success('Transação Atualizada');
+          const clone = JSON.parse(JSON.stringify(transactions));
+          const updatedTransaction = clone.map((t: ITransactionsList) => {
+            if (t.id === id) {
+              return {
+                id,
+                transaction: {
+                  ...data,
+                },
+              };
+            }
+            return t;
+          });
+
+          handleUpdateDash(updatedTransaction);
+        }
+      })
+      .catch(() => {
+        toast.error('houve um erro');
+      });
+  };
+
   const handleUpdateCurrent = (transaction: ITransactions, id?: number) => {
     setCurrentId(id as number | null);
     const clone = JSON.parse(JSON.stringify(transaction));
@@ -218,58 +255,6 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
     const clone = JSON.parse(JSON.stringify(transaction));
     clone[field] = value;
     setCurrent(clone);
-  };
-
-  const handleUpdateDatas = useCallback(
-    (value: string, field: 'nome' | 'preco' | 'tipo' | 'categoria') => {
-      let stateClone = JSON.parse(JSON.stringify(formData));
-      stateClone[field] = String(value);
-
-      setData(stateClone);
-    },
-    [formData]
-  );
-
-  const setError = () => {
-    const clone = JSON.parse(JSON.stringify(isErrored as IError));
-    const fields: ('nome' | 'preco' | 'categoria')[] = [
-      'nome',
-      'preco',
-      'categoria',
-    ];
-
-    fields.forEach((field) => {
-      const isEmpity = formData[field] === '';
-      clone[field] = isEmpity;
-    });
-
-    setIsErrored(clone as IError);
-  };
-
-  const handleCreateTransaction = () => {
-    if (Object.values(formData).includes('')) {
-      setError();
-      toast.error('Há campos em branco!');
-      return;
-    }
-
-    let stateClone = JSON.parse(JSON.stringify(formData));
-    if (stateClone.tipo === 'outcome') {
-      stateClone.preco = String(stateClone.preco - 2 * stateClone.preco);
-    }
-    setLoading(true);
-    Request.transactions_create(stateClone)
-      .then(() => {
-        toast.success('Transação cadastrada');
-        const newTransactions = [
-          ...transactions,
-          { id: transactions.length + 1, transaction: stateClone },
-        ].reverse();
-
-        handleUpdateDash(newTransactions);
-      })
-      .catch(() => toast.error('Houve um erro'))
-      .finally(() => setLoading(false));
   };
 
   const handleClose = async () => {
@@ -289,6 +274,29 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
       categoria: '',
       data: String(new Date()),
     });
+  };
+
+  const handleDeleteTransaction = () => {
+    if (!isADeletingFlow) {
+      setADeletingFlow(true);
+      return;
+    }
+    setLoading(true);
+    Request.transactions_delete(Number(currentId))
+      .then(() => {
+        const clone = JSON.parse(JSON.stringify(transactions));
+        const updatedTransaction = clone.filter((t: ITransactionsList) => {
+          return t.id !== currentId;
+        });
+
+        handleUpdateDash(updatedTransaction);
+
+        toast.success('Transação a foi deletada');
+      })
+      .finally(() => {
+        setADeletingFlow(false);
+        setLoading(false);
+      });
   };
 
   return (
@@ -329,7 +337,7 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
             }}
           />
           <input
-            type="text"
+            type="number"
             placeholder="Preço"
             value={currentTransactionSelected.preco}
             onChange={(e) => {
@@ -365,14 +373,61 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
             <option value={'outcome'}>outcome</option>
             <option value={'income'}>income</option>
           </select>
-          <div>
-            <button>
-              <img src={editar} alt="Editar" />
-            </button>
-            <button>
-              <img src={excluir} alt="excluir" />
-            </button>
-          </div>
+
+          {!isADeletingFlow ? (
+            <div>
+              <button
+                onClick={() =>
+                  handleUpdateATransaction(
+                    currentTransactionSelected,
+                    Number(currentId)
+                  )
+                }
+                disabled={
+                  !currentTransactionSelected.nome ||
+                  !currentTransactionSelected.preco ||
+                  !currentTransactionSelected.tipo ||
+                  !currentTransactionSelected.categoria
+                }
+                type="button"
+              >
+                <img src={editar} alt="Editar" />
+              </button>
+              <button
+                disabled={
+                  !currentTransactionSelected.nome ||
+                  !currentTransactionSelected.preco ||
+                  !currentTransactionSelected.tipo ||
+                  !currentTransactionSelected.categoria
+                }
+                type="button"
+                onClick={() => handleDeleteTransaction()}
+              >
+                <img src={excluir} alt="excluir" />
+              </button>
+            </div>
+          ) : (
+            <div className="deletingConfirmation">
+              <p>
+                {`Você tem certeza que deseja excluir a transação "${currentTransactionSelected.nome}" ?`}
+              </p>
+              {isLoading ? (
+                ' '
+              ) : (
+                <span>
+                  <button
+                    onClick={() => handleDeleteTransaction()}
+                    type="button"
+                  >
+                    Excluir
+                  </button>
+                  <button type="button" onClick={() => setADeletingFlow(false)}>
+                    Cancelar
+                  </button>
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </TableContainer>
     </Modal>
