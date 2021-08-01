@@ -123,6 +123,7 @@ export const TableContainer = styled.div`
         width: 100%;
         margin: 8px;
         padding: 8px;
+        min-height: 50px;
         &:hover {
           filter: brightness(0.9);
         }
