@@ -29,7 +29,7 @@ Projeto da trilha **React**  da Rocketseat o **Dt money**  é uma interface de c
 - Vá até a pasta do projeto 
 - Digite `yarn` no terminal para instalar as dependências 
 - Depois `yarn start`  para iniciar o projeto
-- Depois `yarn db` para iniciar o JSON SERVER
+- Depois em outro terminal `yarn db` para iniciar o JSON SERVER
 
 Agora o projeto está disponível em: http : // localhost:3000 /
 
