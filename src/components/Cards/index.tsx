@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import income from '../../assets/assets/income.svg';
 import outcome from '../../assets/assets/outcome.svg';
 import total from '../../assets/assets/total.svg';
@@ -25,6 +25,15 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ type, transaction }) => {
   const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    let preferences = localStorage.getItem(`@dtMoneyCard_${type}`);
+    if (preferences !== null) {
+      preferences = JSON.parse(preferences);
+      setHidden(Boolean(preferences));
+    }
+  }, []);
+
   const getCardname = (type: 'total' | 'income' | 'outcome') => {
     const titles = { total: 'Total', income: 'Entrada', outcome: 'Saída' };
     return titles[type];
@@ -82,7 +91,10 @@ export const Card: React.FC<CardProps> = ({ type, transaction }) => {
       <button
         type="button"
         className="ocultar"
-        onClick={() => setHidden(!hidden)}
+        onClick={() => {
+          localStorage.setItem(`@dtMoneyCard_${type}`, JSON.stringify(!hidden));
+          setHidden(!hidden);
+        }}
       >
         <img src={eye} alt="ocultar valores" />
       </button>

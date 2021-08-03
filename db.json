@@ -263,7 +263,7 @@
     {
       "transaction": {
         "nome": "ifood",
-        "preco": "-50",
+        "preco": "-70",
         "tipo": "outcome",
         "categoria": "Alimentação",
         "data": "Thu Jul 29 2021 21:03:33 GMT-0300 (Brasilia Standard Time)"

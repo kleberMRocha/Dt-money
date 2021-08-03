@@ -39,7 +39,7 @@ export const Dashboard: React.FC = () => {
     allTransactions: ITransactionsList[],
     value: IUpadeDatas
   ) => {
-    const filtred = allTransactions.filter((t) => {
+    const filtered = allTransactions.filter((t) => {
       if (value.categoriaSelected === '' && !value.isFilterByData) return t;
 
       if (value.isFilterByData && value.byMonth) {
@@ -61,7 +61,7 @@ export const Dashboard: React.FC = () => {
       return t.transaction.categoria === value.categoriaSelected;
     });
 
-    return filtred;
+    return filtered;
   };
 
   const handleUpdateDashboardDatas = async (value: IUpadeDatas) => {
