@@ -13,3 +13,28 @@ export const ChartContainer = styled.div`
     margin: 0 auto;
   }
 `;
+
+export const Contanainer = styled.main`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 18%;
+  width: 100%;
+  height: 100%;
+
+  @media (max-width: 800px) {
+    & {
+      padding: 0;
+      height: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    div {
+      width: 80%;
+      margin-right: 0;
+    }
+    div + div {
+      margin-top: 1rem;
+    }
+  }
+`;

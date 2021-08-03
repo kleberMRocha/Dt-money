@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
 import { Card } from '../components/Cards';
-import styled from 'styled-components';
 import { Table } from '../components/Table';
 import { ModalTdMoney, ModalTdMoneyEditar } from '../components/modal/index';
 import { Request, ITransactions } from '../services/requests';
@@ -9,37 +8,12 @@ import { Loader } from '../components/Loader';
 import { IUpadeDatas } from '../components/Header/filters/filters';
 import { getFomat } from '../utils/getFormat';
 import { PieChart, VerticalBarChart } from '../components/charts/index';
-import { ChartContainer } from './style';
+import { ChartContainer, Contanainer } from './style';
 
 export interface ITransactionsList {
   id: number;
   transaction: ITransactions;
 }
-
-const Contanainer = styled.main`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 0 18%;
-  width: 100%;
-  height: 100%;
-
-  @media (max-width: 800px) {
-    & {
-      padding: 0;
-      height: 100%;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    div {
-      width: 80%;
-      margin-right: 0;
-    }
-    div + div {
-      margin-top: 1rem;
-    }
-  }
-`;
 
 export const Dashboard: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -61,6 +35,35 @@ export const Dashboard: React.FC = () => {
     setInitialDatas();
   }, []);
 
+  let handleFiltredTransactions = (
+    allTransactions: ITransactionsList[],
+    value: IUpadeDatas
+  ) => {
+    const filtred = allTransactions.filter((t) => {
+      if (value.categoriaSelected === '' && !value.isFilterByData) return t;
+
+      if (value.isFilterByData && value.byMonth) {
+        return value.categoriaSelected !== ''
+          ? String(getFomat('date', t.transaction.data)).substring(3) ===
+              value.startDate &&
+              t.transaction.categoria === value.categoriaSelected
+          : String(getFomat('date', t.transaction.data)).substring(3) ===
+              value.startDate;
+      }
+
+      if (value.isFilterByData) {
+        return value.categoriaSelected !== ''
+          ? getFomat('date', t.transaction.data) === value.startDate &&
+              t.transaction.categoria === value.categoriaSelected
+          : getFomat('date', t.transaction.data) === value.startDate;
+      }
+
+      return t.transaction.categoria === value.categoriaSelected;
+    });
+
+    return filtred;
+  };
+
   const handleUpdateDashboardDatas = async (value: IUpadeDatas) => {
     if (value.reset) {
       await setInitialDatas();
@@ -71,27 +74,10 @@ export const Dashboard: React.FC = () => {
       .then((res) => {
         const allTransactions: ITransactionsList[] = res.data;
 
-        let filtredTransactions = allTransactions.filter((t) => {
-          if (value.categoriaSelected === '' && !value.isFilterByData) return t;
-
-          if (value.isFilterByData) {
-            if (value.byMonth) {
-              return value.categoriaSelected !== ''
-                ? String(getFomat('date', t.transaction.data)).substring(3) ===
-                    value.startDate &&
-                    t.transaction.categoria === value.categoriaSelected
-                : String(getFomat('date', t.transaction.data)).substring(3) ===
-                    value.startDate;
-            }
-
-            return value.categoriaSelected !== ''
-              ? getFomat('date', t.transaction.data) === value.startDate &&
-                  t.transaction.categoria === value.categoriaSelected
-              : getFomat('date', t.transaction.data) === value.startDate;
-          }
-
-          return t.transaction.categoria === value.categoriaSelected;
-        });
+        const filtredTransactions = handleFiltredTransactions(
+          allTransactions,
+          value
+        );
 
         if (!value.transactionType.entrada && !value.transactionType.saida) {
           setTransaction(filtredTransactions);
