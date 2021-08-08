@@ -9,6 +9,7 @@ Projeto da trilha **React**  da Rocketseat o **Dt money**  é uma interface de c
  - [x] Gráficos com informações das transações
  - [x] Gerenciar transações (Editar / Excluir)
  - [x] Ocultar Valores consolidados nos Cards 
+ - [X] Design Responsivo  
 
 <img src="https://github.com/kleberMRocha/Dt-money/blob/main/src/assets/DT%20Money.gif" width="700"/>
 
