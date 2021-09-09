@@ -87,7 +87,8 @@ export const Form = styled.form<IError>`
 
 export const TableContainer = styled.div`
   main {
-    min-height: 240px;
+    min-height: 220px;
+    max-height: 220px;
   }
 
   .formContainer {
