@@ -32,7 +32,7 @@ export const Table: React.FC<ITable> = ({
       )}
 
       <Main>
-        {transaction.map((tableIten) => {
+        {transaction.map((tableIten, index) => {
           return (
             <Container
               onClick={() =>
@@ -40,7 +40,7 @@ export const Table: React.FC<ITable> = ({
                 handleUpdateCurrent(tableIten.transaction, tableIten.id)
               }
               type={tableIten.transaction.tipo}
-              key={tableIten.id}
+              key={`${tableIten.transaction.nome}_${index}`}
             >
               {hiddenHeader ? (
                 <button>

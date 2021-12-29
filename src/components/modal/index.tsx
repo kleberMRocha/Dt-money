@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 import { Loader } from '../Loader/index';
@@ -11,6 +11,7 @@ import editar from '../../assets/assets/edit-regular.svg';
 import close from '../../assets/assets/close.svg';
 import { ITransactionsList } from '../../pages/Dashboard';
 import { Table } from '../../components/Table';
+import CurrencyInput from 'react-currency-input-field';
 interface IModal {
   isOpen: boolean;
   handleOpenModal: (value: boolean) => void;
@@ -123,7 +124,7 @@ export const ModalTdMoney: React.FC<IModal> = ({
           className="closeBTn"
           onClick={() => handleClose()}
         >
-         <img src={close} />
+          <img src={close} />
         </button>
       </Header>
       <h2>Cadastrar transação</h2>
@@ -133,11 +134,19 @@ export const ModalTdMoney: React.FC<IModal> = ({
           placeholder="Nome"
           onChange={(e) => handleUpdateDatas(e.target.value, 'nome')}
         />
-        <input
+
+        <CurrencyInput
           id={isErrored.preco ? 'isErrored' : '2'}
+          name="input-name"
           placeholder="Preço"
-          type="number"
-          onChange={(e) => handleUpdateDatas(e.target.value, 'preco')}
+          defaultValue={0}
+          decimalsLimit={2}
+          intlConfig={{ locale: 'pt-BR', currency: 'BRL' }}
+          onValueChange={(value) => {
+            if (value) {
+              handleUpdateDatas(value, 'preco');
+            }
+          }}
         />
         <BtnContainer selectedBtn={formData.tipo}>
           <button
@@ -205,6 +214,12 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
     categoria: '',
     data: String(new Date()),
   });
+
+  const isFilled = useMemo(() => {
+    const { categoria, nome, preco, tipo } = currentTransactionSelected;
+    return !!(categoria && nome && preco && tipo);
+  }, [currentTransactionSelected]);
+
   const [currentId, setCurrentId] = useState<null | number>(null);
 
   const handleUpdateATransaction = (data: ITransactions, id: number) => {
@@ -326,6 +341,7 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
         />
         <div className="formContainer">
           <input
+            disabled={!isFilled}
             type="text"
             placeholder="Nome"
             value={currentTransactionSelected.nome}
@@ -337,19 +353,40 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
               );
             }}
           />
-          <input
-            type="number"
+          <CurrencyInput
+            disabled={!isFilled}
+            name="input-name"
             placeholder="Preço"
+            decimalsLimit={2}
+            defaultValue={0}
             value={currentTransactionSelected.preco}
-            onChange={(e) => {
+            intlConfig={{ locale: 'pt-BR', currency: 'BRL' }}
+            onValueChange={(value) => {
+              if (value) {
+                value =
+                  currentTransactionSelected.tipo === 'income'
+                    ? String(Math.abs(Number(value)))
+                    : value;
+
+                {
+                  handleUpdateInputEdit(
+                    currentTransactionSelected,
+                    'preco',
+                    String(value)
+                  );
+                }
+                return;
+              }
               handleUpdateInputEdit(
                 currentTransactionSelected,
                 'preco',
-                e.target.value
+                String(0)
               );
             }}
           />
+
           <input
+            disabled={!isFilled}
             type="text"
             placeholder="Categoria"
             value={currentTransactionSelected.categoria}
@@ -362,6 +399,7 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
             }}
           />
           <select
+            disabled={!isFilled}
             onChange={(e) => {
               handleUpdateInputEdit(
                 currentTransactionSelected,

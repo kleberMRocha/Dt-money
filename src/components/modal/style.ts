@@ -72,12 +72,13 @@ export const Form = styled.form<IError>`
     border-radius: 5px;
     height: 64px;
     margin: 16px;
-    padding: 4px;
+    padding: 8px;
     &::placeholder {
       padding: 8px;
     }
   }
   button {
+    margin-top: 16px;
     :hover {
       transition: 0.5s;
       filter: contrast(120%);

@@ -12,6 +12,7 @@
     "react": "^17.0.2",
     "react-animations": "^1.0.0",
     "react-chartjs-2": "^3.0.4",
+    "react-currency-input-field": "^3.6.0",
     "react-datepicker": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
