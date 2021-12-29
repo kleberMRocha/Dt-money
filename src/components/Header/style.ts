@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 
-export const HeaderDt = styled.header`
+export const HeaderDt = styled.div`
   .buttonHeaderContainer {
-    max-width: 50%;
-    min-height: 48px;
+    max-width: 100%;
+    min-height: 50px;
     box-sizing: border-box;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: stretch;
     flex-wrap: wrap;
-
+    button.filterBtn span {
+      display: none;
+    }
     button {
       margin: 4px;
     }
@@ -77,8 +79,24 @@ export const HeaderDt = styled.header`
         height: 50px;
       }
     }
+
+    .buttonHeaderContainer {
+      min-height: 100px;
+      button.filterBtn span {
+        display: block;
+      }
+
+      button {
+        img {
+          display: none;
+        }
+      }
+    }
+
     header {
-      height: 8rem;
+      height: 15rem;
+      flex-direction: column;
+      gap: 16px;
       align-items: center;
       justify-content: center;
     }

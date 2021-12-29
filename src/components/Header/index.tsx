@@ -39,10 +39,10 @@ export const Header: React.FC<IHeader> = ({
               className="buttonDashboard"
               onClick={() => handleOpenModal(true)}
             >
-              <span>Nova transação</span>
+              Nova transação
             </button>
-            <button className="buttonDashboard" onClick={() => setIsOpen(true)}>
-              <img src={filterSolid} alt="filtrar" />
+            <button className="buttonDashboard filterBtn" onClick={() => setIsOpen(true)}>
+              <span> Filtrar Transações </span> <img src={filterSolid} alt="filtrar" />
             </button>
           </div>
         </header>

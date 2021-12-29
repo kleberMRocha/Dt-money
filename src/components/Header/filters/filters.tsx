@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Datepicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import './datepicker.css';
 import { getFomat } from '../../../utils/getFormat';
 import { Request } from '../../../services/requests';
 import { ContainerFiltros } from './style';
@@ -144,7 +145,9 @@ export const Filters: React.FC<IFilter> = ({
           {isFilterByData && (
             <>
               <Datepicker
+                showMonthDropdown
                 locale="ptBR"
+                focusSelectedMonth
                 value={startDate}
                 onChange={(e) => handleSetDate(e)}
               />

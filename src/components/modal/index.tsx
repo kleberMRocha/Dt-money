@@ -8,6 +8,7 @@ import income from '../../assets/assets/income.svg';
 import outcome from '../../assets/assets/outcome.svg';
 import excluir from '../../assets/assets/trash-solid.svg';
 import editar from '../../assets/assets/edit-regular.svg';
+import close from '../../assets/assets/close.svg';
 import { ITransactionsList } from '../../pages/Dashboard';
 import { Table } from '../../components/Table';
 interface IModal {
@@ -122,7 +123,7 @@ export const ModalTdMoney: React.FC<IModal> = ({
           className="closeBTn"
           onClick={() => handleClose()}
         >
-          X
+         <img src={close} />
         </button>
       </Header>
       <h2>Cadastrar transação</h2>
@@ -313,7 +314,7 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
           className="closeBTn"
           onClick={() => handleClose()}
         >
-          X
+          <img src={close} alt="fechar" />
         </button>
       </Header>
       <h2> Gerenciar Transações </h2>
