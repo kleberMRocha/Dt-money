@@ -2,7 +2,6 @@ import styled, { keyframes } from 'styled-components';
 import { fadeInRight } from 'react-animations';
 
 const fadeInRightAnimation = keyframes`${fadeInRight}`;
-
 export const ContainerFiltros = styled.aside`
   position: fixed;
   animation: 0.5s ${fadeInRightAnimation};

@@ -132,73 +132,13 @@
     },
     {
       "transaction": {
-        "nome": "Uber",
-        "preco": "-15",
+        "nome": "Roupas",
+        "preco": "-130",
         "tipo": "outcome",
-        "categoria": "Transporte",
-        "data": "Sat Jul 24 2021 21:18:15 GMT-0300 (Brasilia Standard Time)"
+        "categoria": "Vestimanta",
+        "data": "Thu Dec 30 2021 23:14:10 GMT-0300 (Brasilia Standard Time)"
       },
       "id": 16
-    },
-    {
-      "transaction": {
-        "nome": "uber",
-        "preco": "-15",
-        "tipo": "outcome",
-        "categoria": "Transporte",
-        "data": "Sat Jul 24 2021 21:27:42 GMT-0300 (Brasilia Standard Time)"
-      },
-      "id": 17
-    },
-    {
-      "transaction": {
-        "nome": "Farmácia",
-        "preco": "-50",
-        "tipo": "outcome",
-        "categoria": "Saúde ",
-        "data": "Sat Jul 24 2021 21:28:55 GMT-0300 (Brasilia Standard Time)"
-      },
-      "id": 18
-    },
-    {
-      "transaction": {
-        "nome": "Uber",
-        "preco": "-12",
-        "tipo": "outcome",
-        "categoria": "Transporte",
-        "data": "Sat Jul 24 2021 21:30:34 GMT-0300 (Brasilia Standard Time)"
-      },
-      "id": 19
-    },
-    {
-      "transaction": {
-        "nome": "Frelancer",
-        "preco": "80",
-        "tipo": "income",
-        "categoria": "Salário",
-        "data": "Sat Jul 24 2021 21:32:21 GMT-0300 (Brasilia Standard Time)"
-      },
-      "id": 20
-    },
-    {
-      "transaction": {
-        "nome": "Uber",
-        "preco": "-20",
-        "tipo": "outcome",
-        "categoria": "Transporte",
-        "data": "Sat Jul 24 2021 21:35:09 GMT-0300 (Brasilia Standard Time)"
-      },
-      "id": 22
-    },
-    {
-      "transaction": {
-        "nome": "gf",
-        "preco": "564",
-        "tipo": "income",
-        "categoria": "456",
-        "data": "Wed Dec 29 2021 20:18:40 GMT-0300 (Brasilia Standard Time)"
-      },
-      "id": 23
     }
   ]
 }

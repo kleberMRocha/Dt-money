@@ -148,6 +148,9 @@ export const Filters: React.FC<IFilter> = ({
                 showMonthDropdown
                 locale="ptBR"
                 focusSelectedMonth
+                peekNextMonth
+                showYearDropdown
+                dropdownMode="select"
                 value={startDate}
                 onChange={(e) => handleSetDate(e)}
               />

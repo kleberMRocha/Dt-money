@@ -312,6 +312,7 @@ export const ModalTdMoneyEditar: React.FC<IModal> = ({
       .finally(() => {
         setADeletingFlow(false);
         setLoading(false);
+        handleUpdateCurrent({} as ITransactions, undefined);
       });
   };
 
